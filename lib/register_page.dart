@@ -7,13 +7,14 @@ import 'Button2.dart';
 import 'Form.dart';
 import 'Form2.dart';
 import 'Mybutton.dart';
+import 'login_page.dart';
 
 class Register extends StatelessWidget {
   
    Register({ Key? formkey }) : super(key: formkey);
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passcontroller = TextEditingController();
-
+   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -89,7 +90,7 @@ class Register extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 30.0,
+                        height: 32.0,
                       ),
                       const Text(
                         'Email',
@@ -121,7 +122,7 @@ class Register extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 9.0,
+                        height: 11.0,
                       ),
                       Picker2(),
                       const SizedBox(
@@ -143,7 +144,7 @@ class Register extends StatelessWidget {
                         type: TextInputType.visiblePassword,
                         controller: passcontroller,
                         isPassword: true,
-                        icon:Icon( Icons.remove_red_eye),
+                        icon:const Icon( Icons.remove_red_eye),
 
                       ),
                       const SizedBox(
@@ -155,7 +156,9 @@ class Register extends StatelessWidget {
                       MyButton(
                         text: 'Register',
                         onClick: () {
-                         
+                          if(formKey.currentState!.validate()){
+
+                          }
                         },
                       ),
                       const SizedBox(
@@ -197,7 +200,13 @@ class Register extends StatelessWidget {
                                 fontSize: 18.0,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => Login(),
+                                  ),
+                              );
+                            },
                           ),
                         ],
                       ),

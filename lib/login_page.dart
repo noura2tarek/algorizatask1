@@ -1,17 +1,15 @@
-//import 'dart:ui';
 
 //import 'package:flutter/cupertino.dart';
-//import 'dart:ui';
 //import 'package:country_pickers/country.dart';
-
 //import 'package:country_pickers/country_pickers.dart';
 
 import 'package:algorizatask/picker2.dart';
+import 'package:algorizatask/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'Button2.dart';
-import 'Form2.dart';
+//import 'Form2.dart';
 import 'Mybutton.dart';
 
 class Login extends StatefulWidget {
@@ -23,7 +21,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   TextEditingController Phonecontroller = TextEditingController();
-
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +115,11 @@ class _LoginState extends State<Login> {
                       ),
                       MyButton(
                         text: 'Sign in',
-                        onClick: () {},
+                        onClick: () {
+                          if(formKey.currentState!.validate()){
+
+                          }
+                        },
                       ),
                       const SizedBox(
                         height: 18,
@@ -136,7 +138,7 @@ class _LoginState extends State<Login> {
                       const SizedBox(
                         height: 18,
                       ),
-                      OutButton(),
+                      const OutButton(),
                       const SizedBox(
                         height: 19,
                       ),
@@ -158,7 +160,13 @@ class _LoginState extends State<Login> {
                                 fontSize: 18.0,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => Register(),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

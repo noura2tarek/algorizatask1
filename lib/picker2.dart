@@ -12,11 +12,11 @@ class Picker2 extends StatefulWidget {
 
 class _Picker2State extends State<Picker2> {
   
-   Country _selectedDialogCountry =
-      CountryPickerUtils.getCountryByPhoneCode('90');
+  // Country _selectedDialogCountry =
+    //  CountryPickerUtils.getCountryByPhoneCode('90');
 
-  Country _selectedFilteredDialogCountry =
-      CountryPickerUtils.getCountryByPhoneCode('90');
+  //Country _selectedFilteredDialogCountry =
+      //CountryPickerUtils.getCountryByPhoneCode('90');
 
   Country _selectedCupertinoCountry =
       CountryPickerUtils.getCountryByIsoCode('tr');
@@ -71,7 +71,7 @@ class _Picker2State extends State<Picker2> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  //Text("CountryPickerDropdown (has priorityList['GB,'CN'])"),
+
                   ListTile(
                       title: _buildCountryPickerDropdown(hasPriorityList: true)),
                 ],
@@ -131,35 +131,35 @@ class _Picker2State extends State<Picker2> {
       );
   }
 
-  _buildCountryPickerDropdownSoloExpanded() {
-    return CountryPickerDropdown(
-      underline: Container(
-        height: 2,
-        color: Colors.red,
-      ),
-      //show'em (the text fields) you're in charge now
-      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      //if you want your dropdown button's selected item UI to be different
-      //than itemBuilder's(dropdown menu item UI), then provide this selectedItemBuilder.
-      onValuePicked: (Country country) {
-        print("${country.name}");
-      },
-      itemBuilder: (Country country) {
-        return Row(
-          children: <Widget>[
-            SizedBox(width: 8.0),
-            CountryPickerUtils.getDefaultFlagImage(country),
-            SizedBox(width: 8.0),
-            Expanded(child: Text(country.name)),
-          ],
-        );
-      },
-      itemHeight: null,
-      isExpanded: true,
-      //initialValue: 'TR',
-      icon: Icon(Icons.arrow_downward),
-    );
-  }
+  // _buildCountryPickerDropdownSoloExpanded() {
+  //   return CountryPickerDropdown(
+  //     underline: Container(
+  //       height: 2,
+  //       color: Colors.red,
+  //     ),
+  //     //show'em (the text fields) you're in charge now
+  //     onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+  //     //if you want your dropdown button's selected item UI to be different
+  //     //than itemBuilder's(dropdown menu item UI), then provide this selectedItemBuilder.
+  //     onValuePicked: (Country country) {
+  //       print("${country.name}");
+  //     },
+  //     itemBuilder: (Country country) {
+  //       return Row(
+  //         children: <Widget>[
+  //           SizedBox(width: 8.0),
+  //           CountryPickerUtils.getDefaultFlagImage(country),
+  //           SizedBox(width: 8.0),
+  //           Expanded(child: Text(country.name)),
+  //         ],
+  //       );
+  //     },
+  //     itemHeight: null,
+  //     isExpanded: true,
+  //     //initialValue: 'TR',
+  //     icon: Icon(Icons.arrow_downward),
+  //   );
+  // }
 
   _buildCountryPickerDropdown(
       {bool filtered = false,
@@ -212,9 +212,15 @@ class _Picker2State extends State<Picker2> {
         ),
         // ignore: prefer_const_constructors
         Expanded(
-          child: const TextField(
-            
-            decoration: InputDecoration(
+          child:  TextFormField(
+            validator: (value) {
+              if(value!.isEmpty){
+                return 'phone number is not registered';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+
               border: InputBorder.none,
               labelText: "Eg. 812345678",
               isDense: true,
@@ -290,85 +296,85 @@ class _Picker2State extends State<Picker2> {
         ],
       );
 
-  void _openCountryPickerDialog() => showDialog(
-        context: context,
-        builder: (context) => Theme(
-          data: Theme.of(context).copyWith(primaryColor: Colors.pink),
-          child: CountryPickerDialog(
-            titlePadding: EdgeInsets.all(8.0),
-            searchCursorColor: Colors.pinkAccent,
-            searchInputDecoration: InputDecoration(hintText: 'Search...'),
-            isSearchable: true,
-            title: Text('Select your phone code'),
-            onValuePicked: (Country country) =>
-                setState(() => _selectedDialogCountry = country),
-            itemBuilder: _buildDialogItem,
-            priorityList: [
-              CountryPickerUtils.getCountryByIsoCode('TR'),
-              CountryPickerUtils.getCountryByIsoCode('US'),
-            ],
-          ),
-        ),
-      );
+  // void _openCountryPickerDialog() => showDialog(
+  //       context: context,
+  //       builder: (context) => Theme(
+  //         data: Theme.of(context).copyWith(primaryColor: Colors.pink),
+  //         child: CountryPickerDialog(
+  //           titlePadding: EdgeInsets.all(8.0),
+  //           searchCursorColor: Colors.pinkAccent,
+  //           searchInputDecoration: InputDecoration(hintText: 'Search...'),
+  //           isSearchable: true,
+  //           title: Text('Select your phone code'),
+  //           onValuePicked: (Country country) =>
+  //               setState(() => _selectedDialogCountry = country),
+  //           itemBuilder: _buildDialogItem,
+  //           priorityList: [
+  //             CountryPickerUtils.getCountryByIsoCode('TR'),
+  //             CountryPickerUtils.getCountryByIsoCode('US'),
+  //           ],
+  //         ),
+  //       ),
+  //     );
 
-  void _openFilteredCountryPickerDialog() => showDialog(
-        context: context,
-        builder: (context) => Theme(
-            data: Theme.of(context).copyWith(primaryColor: Colors.pink),
-            child: CountryPickerDialog(
-                titlePadding: EdgeInsets.all(8.0),
-                searchCursorColor: Colors.pinkAccent,
-                searchInputDecoration: InputDecoration(hintText: 'Search...'),
-                isSearchable: true,
-                title: Text('Select your phone code'),
-                onValuePicked: (Country country) =>
-                    setState(() => _selectedFilteredDialogCountry = country),
-                itemFilter: (c) => ['AR', 'DE', 'GB', 'CN'].contains(c.isoCode),
-                itemBuilder: _buildDialogItem)),
-      );
+  // void _openFilteredCountryPickerDialog() => showDialog(
+  //       context: context,
+  //       builder: (context) => Theme(
+  //           data: Theme.of(context).copyWith(primaryColor: Colors.pink),
+  //           child: CountryPickerDialog(
+  //               titlePadding: EdgeInsets.all(8.0),
+  //               searchCursorColor: Colors.pinkAccent,
+  //               searchInputDecoration: InputDecoration(hintText: 'Search...'),
+  //               isSearchable: true,
+  //               title: Text('Select your phone code'),
+  //               onValuePicked: (Country country) =>
+  //                   setState(() => _selectedFilteredDialogCountry = country),
+  //               itemFilter: (c) => ['AR', 'DE', 'GB', 'CN'].contains(c.isoCode),
+  //               itemBuilder: _buildDialogItem)),
+  //     );
 
-  void _openCupertinoCountryPicker() => showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return CountryPickerCupertino(
-          backgroundColor: Colors.black,
-          itemBuilder: _buildCupertinoItem,
-          pickerSheetHeight: 300.0,
-          pickerItemHeight: 75,
-          initialCountry: _selectedCupertinoCountry,
-          onValuePicked: (Country country) =>
-              setState(() => _selectedCupertinoCountry = country),
-          priorityList: [
-            CountryPickerUtils.getCountryByIsoCode('TR'),
-            CountryPickerUtils.getCountryByIsoCode('US'),
-          ],
-        );
-      });
+  // void _openCupertinoCountryPicker() => showCupertinoModalPopup<void>(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return CountryPickerCupertino(
+  //         backgroundColor: Colors.black,
+  //         itemBuilder: _buildCupertinoItem,
+  //         pickerSheetHeight: 300.0,
+  //         pickerItemHeight: 75,
+  //         initialCountry: _selectedCupertinoCountry,
+  //         onValuePicked: (Country country) =>
+  //             setState(() => _selectedCupertinoCountry = country),
+  //         priorityList: [
+  //           CountryPickerUtils.getCountryByIsoCode('TR'),
+  //           CountryPickerUtils.getCountryByIsoCode('US'),
+  //         ],
+  //       );
+  //     });
 
-  void _openFilteredCupertinoCountryPicker() => showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return CountryPickerCupertino(
-          backgroundColor: Colors.white,
-          pickerSheetHeight: 200.0,
-          initialCountry: _selectedFilteredCupertinoCountry,
-          onValuePicked: (Country country) =>
-              setState(() => _selectedFilteredCupertinoCountry = country),
-          itemFilter: (c) => ['AR', 'DE', 'GB', 'CN'].contains(c.isoCode),
-        );
-      });
+  // void _openFilteredCupertinoCountryPicker() => showCupertinoModalPopup<void>(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return CountryPickerCupertino(
+  //         backgroundColor: Colors.white,
+  //         pickerSheetHeight: 200.0,
+  //         initialCountry: _selectedFilteredCupertinoCountry,
+  //         onValuePicked: (Country country) =>
+  //             setState(() => _selectedFilteredCupertinoCountry = country),
+  //         itemFilter: (c) => ['AR', 'DE', 'GB', 'CN'].contains(c.isoCode),
+  //       );
+  //     });
 
-  Widget _buildCupertinoSelectedItem(Country country) {
-    return Row(
-      children: <Widget>[
-        CountryPickerUtils.getDefaultFlagImage(country),
-        SizedBox(width: 8.0),
-        Text("+${country.phoneCode}"),
-        SizedBox(width: 8.0),
-        Flexible(child: Text(country.name))
-      ],
-    );
-  }
+  // Widget _buildCupertinoSelectedItem(Country country) {
+  //   return Row(
+  //     children: <Widget>[
+  //       CountryPickerUtils.getDefaultFlagImage(country),
+  //       SizedBox(width: 8.0),
+  //       Text("+${country.phoneCode}"),
+  //       SizedBox(width: 8.0),
+  //       Flexible(child: Text(country.name))
+  //     ],
+  //   );
+  // }
 
   Widget _buildCupertinoItem(Country country) {
     return DefaultTextStyle(

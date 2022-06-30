@@ -1,10 +1,10 @@
 import 'package:algorizatask/login_page.dart';
 //import 'package:algorizatask/picker.dart';
-import 'package:algorizatask/picker2.dart';
-import 'package:algorizatask/register_page.dart';
+//import 'package:algorizatask/picker2.dart';
+//import 'package:algorizatask/register_page.dart';
 import 'package:flutter/material.dart';
 
-import 'Form2.dart';
+//import 'Form2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         
         primarySwatch: Colors.blue,
       ),
-      home: Register() ,
+      home: Login() ,
     );
   }
 }
